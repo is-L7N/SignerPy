@@ -61,3 +61,10 @@ headers.update({
 ## License
 
 MIT License
+
+## Developer
+
+[![Author](https://img.shields.io/badge/Author-L7N-blue?style=for-the-badge&logo=github)](https://github.com/is-L7N)
+[![Telegram](https://img.shields.io/badge/Telegram-PyL7N-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/PyL7N)
+[![GitHub](https://img.shields.io/badge/GitHub-is--L7N-181717?style=for-the-badge&logo=github)](https://github.com/is-L7N)
+
