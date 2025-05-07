@@ -27,6 +27,8 @@ params = get({
     "device_platform": "android",
     "aid": 1233
 })
+
+# just put the original params and the library generate new params !
 ```
 
 ### 2. Sign Headers
@@ -34,7 +36,21 @@ params = get({
 ```python
 from SignerPy import sign
 
-headers = sign(params=params, payload='your_post_data_here')
+signature = sign(params=params)
+# if the request need payload, cookie you can do:
+signature = sign(params=params, payload=payload, cookie=cookie)
+
+# and just write
+
+headers.update({
+    'x-ss-req-ticket': signature['x-ss-req-ticket'],
+    'x-argus': signature["x-argus"],
+    'x-gorgon': signature["x-gorgon"],
+    'x-khronos': signature["x-khronos"],
+    'x-ladon': signature["x-ladon"],
+    })
+
+
 ```
 
 ## Notes
