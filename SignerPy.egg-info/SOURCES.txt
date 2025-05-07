@@ -1,0 +1,8 @@
+LICENSE.txt
+setup.py
+SignerPy/__init__.py
+SignerPy.egg-info/PKG-INFO
+SignerPy.egg-info/SOURCES.txt
+SignerPy.egg-info/dependency_links.txt
+SignerPy.egg-info/requires.txt
+SignerPy.egg-info/top_level.txt
