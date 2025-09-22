@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 setup(
     name="SignerPy",
-    version="0.1",
+    version="0.7",
     author="L7N",
     author_email="l7ng4q@gmail.com",
-    description="SignerPy For TikTok",
+    description="Signture TikTok Headers and More",
     packages=find_packages(),
     install_requires=[
         "user_agent",
