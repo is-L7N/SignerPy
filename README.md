@@ -17,9 +17,10 @@ SignerPy is a Python library that provides various tools for encryption, signing
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/SignerPy.git
+pip install SignerPy==0.8
+git clone https://github.com/is-L7N/SignerPy.git
 cd SignerPy
-pip install -r requirements.txt
+
 ```
 
 ---
@@ -184,7 +185,7 @@ b'tc\x05\x10\x00\x00\x1c^\xe4\xa6...'
 ```
 
 ## ✍️ Author
-- [![Telegram](https://img.shields.io/badge/Telegram-PyL7N-0088cc?style=flat-square&logo=telegram)](https://t.me/PyL7N)
+- [![Telegram](https://img.shields.io/badge/Telegram-PyL7N-0088cc?style=flat-square&logo=telegram)](https://t.me/PyLast)
 - [![GitHub](https://img.shields.io/badge/GitHub-is--L7N-181717?style=flat-square&logo=github)](https://github.com/is-L7N)
 
 ---
