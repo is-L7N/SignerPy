@@ -32,6 +32,8 @@ SignerPy contains the following modules:
 
 | Module | Description |
 |--------|-------------|
+| `sign` | Generates request headers signatures.|
+| `get` | update params iid, device_id, cdid, etc...|
 | `encryption` | Provides `enc` and `dec` functions for encryption/decryption. |
 | `hosts` | Returns a list of TikTok API hosts using `host()`. |
 | `xor` | Simple XOR encoding of strings. |
@@ -46,6 +48,26 @@ SignerPy contains the following modules:
 ---
 
 ## Usage Examples
+
+## Signture Headers 
+```python
+from SignerPy import sign
+
+signature = sign(params=params, payload=None)
+print(signature)
+```
+**Sample Output:**
+
+```json
+{'x-ss-req-ticket': '1762259171000', 'x-khronos': '1762259171', 'x-gorgon': '840490e90000eb195e1a4e93f8ee4c6096ef9be9245477614426', 'content-length': '2', 'x-ss-stub': 'D2E4201A71AB14D92FD36DA8B4DC6E47', 'x-ladon': 'YVfzzrPh5G1mKlCPOwnRyTBLvSlCwcMoUJpynWn7LKq5IpjO', 'x-argus': '8oES6TTDk19XpiXVRoMY8sSm2PHDIlHeay5JCmPO6o+RltBIOc0BCDuZDMos550YipLLaqxeRkhXwqg+r6keWsdL5eeIWHPB7906llEJi+4oUlXZHjQZUpgu8hhojjt6SluTr8zDWpDsP9eoSbrEX/sE6FLWogayQpDgfivNeEzjMI1qs/CKZi0KNC4Es1+LjBii6IHrWtwgPlv9fmiL+xlS8rc5+L9hrqK38Bm49QsmmA=='}
+```
+
+## Get Modern Params
+
+```python
+from SignerPy import get
+params.update(SignerPy.get(params=params))
+```
 
 ### Encryption & Decryption
 
