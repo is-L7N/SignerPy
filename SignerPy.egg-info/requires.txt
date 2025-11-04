@@ -1,3 +1,5 @@
 user_agent
 requests
 pycryptodome
+random
+uuid

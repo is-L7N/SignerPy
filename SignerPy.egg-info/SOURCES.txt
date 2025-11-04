@@ -1,6 +1,17 @@
 LICENSE.txt
+setup.cfg
 setup.py
+SignerPy/Simon.py
+SignerPy/Sm3.py
 SignerPy/__init__.py
+SignerPy/argus.py
+SignerPy/gorgon.py
+SignerPy/ladon.py
+SignerPy/protobuf.py
+SignerPy/hosts.py
+SignerPy/url_to_params.py
+SignerPy/ttencrypt.py
+SignerPy/encryption.py
 SignerPy.egg-info/PKG-INFO
 SignerPy.egg-info/SOURCES.txt
 SignerPy.egg-info/dependency_links.txt

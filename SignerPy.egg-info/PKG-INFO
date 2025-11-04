@@ -1,7 +1,7 @@
-Metadata-Version: 2.2
+Metadata-Version: 2.4
 Name: SignerPy
-Version: 0.1
-Summary: SignerPy For TikTok
+Version: 0.8
+Summary: Signture TikTok Headers and More
 Author: L7N
 Author-email: l7ng4q@gmail.com
 Classifier: Programming Language :: Python :: 3
@@ -15,6 +15,7 @@ Requires-Dist: pycryptodome
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
+Dynamic: license-file
 Dynamic: requires-dist
 Dynamic: requires-python
 Dynamic: summary
