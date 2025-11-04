@@ -182,3 +182,20 @@ print(encrypted)
 ```
 b'tc\x05\x10\x00\x00\x1c^\xe4\xa6...'
 ```
+
+## ✍️ Author
+- [![Telegram](https://img.shields.io/badge/Telegram-PyL7N-0088cc?style=flat-square&logo=telegram)](https://t.me/PyL7N)
+- [![GitHub](https://img.shields.io/badge/GitHub-is--L7N-181717?style=flat-square&logo=github)](https://github.com/is-L7N)
+
+---
+</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Author-L7N-blue?style=flat-square" alt="author">
+  <img src="https://img.shields.io/badge/Language-Python-blue?style=flat-square">
+  <img src="https://img.shields.io/badge/Status-Working-success?style=flat-square">
+</p>
+
+---
+
+
