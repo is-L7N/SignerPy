@@ -41,8 +41,9 @@ SignerPy contains the following modules:
 | `xtoken` | Generates `x-token` values for API requests. |
 | `trace_id` | Generates a trace ID for TikTok devices. |
 | `sign` | Generates request signatures. |
-| `md5stub` | Generates MD5 hash of a string or body. |
+| `edata` | edata Tiktok Encryption and Decryption easy |
 | `ttencrypt` | Provides advanced encryption (`Enc().encrypt()`). |
+| `md5stub` | Generates MD5 hash of a string or body. |
 | `*` | Imports all functions for easy access. |
 
 ---
@@ -191,6 +192,31 @@ print(hash_value)
 ```
 866F9F9C270106B1AF8063FFD0A80A22
 ```
+### edata decrypt
+
+```python
+from SignerPy.edata import decrypt
+
+print(decrypt(edata="ARMZiZCPPJD5AodPZbiXUFiNZYY/zPssCFJJmuLj6yeVRqG3NZ+ryYE0xAr/OVIbQemdMonPYUUzSyWcFHS5bwxmB9s="))
+```
+**Sample Output:**
+
+'''
+{"need_captcha":false"}
+'''
+### edata encrypt
+
+```python
+from SignerPy.edata import encrypt
+
+print(encrypt(edata=b'{"need_captcha":false"}'))
+```
+
+**Sample Output:**
+
+'''
+ATgiwD0XRkbaBpYdr1oTAs2PvSg6d5ExfzfmZanrGWShoooGLLhPIa1nImegxqCo0OOjpG6Uz2Vzndu6uxRPRfd72VA=
+'''
 
 ### TTEncrypt
 
