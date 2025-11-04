@@ -1,4 +1,5 @@
-# SignerPy Utility Library
+# SignerPy Utility Library 
+# New Update 8404 Gorgon and more
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 
