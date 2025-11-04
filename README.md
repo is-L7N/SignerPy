@@ -1,70 +1,184 @@
-# SignerPy
+# SignerPy Utility Library
 
-**SignerPy** is a lightweight Python library for generating signed headers and parameters for TikTok's internal API.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
 
-## Features
+SignerPy is a Python library that provides various tools for encryption, signing, URL parsing, token generation, and more, mainly designed for interacting with TikTok APIs.
 
-- Generate `x-argus`, `x-ladon`, `x-ss-stub`, and `gorgon` headers.
-- Supports signing both GET and POST requests.
-- Automatically fills essential TikTok parameters like `_rticket`, `ts`, `iid`, and `device_id`.
+---
+
+## Table of Contents
+- [Installation](#installation)
+- [Modules](#modules)
+- [Usage Examples](#usage-examples)
+- [Output Samples](#output-samples)
+
+---
 
 ## Installation
 
-Place `SignerPy.py` in your project directory and import the methods:
-
-```python
-from SignerPy import sign, get
+```bash
+git clone https://github.com/yourusername/SignerPy.git
+cd SignerPy
+pip install -r requirements.txt
 ```
 
-## Usage
+---
 
-### 1. Generate Parameters
+## Modules
+
+SignerPy contains the following modules:
+
+| Module | Description |
+|--------|-------------|
+| `encryption` | Provides `enc` and `dec` functions for encryption/decryption. |
+| `hosts` | Returns a list of TikTok API hosts using `host()`. |
+| `xor` | Simple XOR encoding of strings. |
+| `url_to_params` | Parses a URL query string into a dictionary using `dicts()`. |
+| `xtoken` | Generates `x-token` values for API requests. |
+| `trace_id` | Generates a trace ID for TikTok devices. |
+| `sign` | Generates request signatures. |
+| `md5stub` | Generates MD5 hash of a string or body. |
+| `ttencrypt` | Provides advanced encryption (`Enc().encrypt()`). |
+| `*` | Imports all functions for easy access. |
+
+---
+
+## Usage Examples
+
+### Encryption & Decryption
 
 ```python
-from SignerPy import get
+from SignerPy.encryption import enc, dec
 
-params = get({
-    "device_platform": "android",
-    "aid": 1233
-})
+data = {
+    "aid": "1988",
+    "app_name": "tiktok_web",
+    "device_platform": "web_pc"
+}
 
-# just put the original params and the library generate new params !
+encrypted = enc(data)
+print(encrypted)
+
+decrypted = dec(encrypted)
+print(decrypted)
 ```
 
-### 2. Sign Headers
+**Sample Output:**
+
+```json
+{
+  "aid": "1988",
+  "app_name": "tiktok_web",
+  "device_platform": "web_pc"
+}
+```
+
+### Hosts
 
 ```python
-from SignerPy import sign
+from SignerPy.hosts import host
 
-signature = sign(params=params)
-# if the request need payload, cookie you can do:
-signature = sign(params=params, payload=payload, cookie=cookie)
-
-# and just write
-
-headers.update({
-    'x-ss-req-ticket': signature['x-ss-req-ticket'],
-    'x-argus': signature["x-argus"],
-    'x-gorgon': signature["x-gorgon"],
-    'x-khronos': signature["x-khronos"],
-    'x-ladon': signature["x-ladon"],
-    })
-
-
+print(host())
 ```
 
-## Notes
+**Sample Output:**
 
-- This library is built for private research and educational use.
-- TikTok may change their signing algorithm at any time.
+```
+['api16-normal-no1a.tiktokv.eu', 'api16-normal-c-alisg.tiktokv.com', ...]
+```
 
-## License
+### XOR Encoding
 
-MIT License
+```python
+from SignerPy import xor
 
-## Developer
+encoded = xor("email or username")
+print(encoded)
+```
 
-[![Author](https://img.shields.io/badge/Author-L7N-blue?style=for-the-badge&logo=github)](https://github.com/is-L7N)
-[![Telegram](https://img.shields.io/badge/Telegram-PyL7N-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/PyL7N)
-[![GitHub](https://img.shields.io/badge/GitHub-is--L7N-181717?style=for-the-badge&logo=github)](https://github.com/is-L7N)
+**Sample Output:**
 
+```
+6068646c69256a7725707660776b646860
+```
+
+### URL to Dictionary
+
+```python
+from SignerPy.url_to_params import dicts
+
+url = "https://api16-normal-c-alisg.tiktokv.com/lite/v2/public/item/list/?source=0&sec_user_id=XXXXX"
+params = dicts(url=url)
+print(params)
+```
+
+**Sample Output:**
+
+```json
+{
+  "source": "0",
+  "sec_user_id": "XXXXX",
+  "count": "9",
+  "app_name": "musically_go"
+}
+```
+
+### XToken
+
+```python
+from SignerPy import xtoken
+
+x_token = xtoken(params="", sessionid="")
+print(x_token)
+```
+
+**Sample Output:**
+
+```
+7a3465ad525ddf8ba13bc005d45c99a0f480a503b4c3b2a3f5aa184cdb332102--...
+```
+
+### Trace ID
+
+```python
+from SignerPy import trace_id
+
+trace = trace_id(device_id="1234567890")
+print(trace)
+```
+
+**Sample Output:**
+
+```
+00-4eee0edf08499602d2277ea43fe8-4eee0edf08499602-01
+```
+
+### MD5 Hash
+
+```python
+from SignerPy import md5stub
+
+hash_value = md5stub(body="username=L7N")
+print(hash_value)
+```
+
+**Sample Output:**
+
+```
+866F9F9C270106B1AF8063FFD0A80A22
+```
+
+### TTEncrypt
+
+```python
+from SignerPy import ttencrypt
+
+encrypted = ttencrypt.Enc().encrypt(data="username=L7N")
+print(encrypted)
+```
+
+**Sample Output:**
+
+```
+b'tc\x05\x10\x00\x00\x1c^\xe4\xa6...'
+```
