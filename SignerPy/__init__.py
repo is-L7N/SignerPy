@@ -1,6 +1,6 @@
-from SignerPy.argus  import *
-from SignerPy.ladon  import *
-from SignerPy.gorgon import *
+from .argus  import *
+from .ladon  import *
+from .gorgon import *
 from SignerPy import md5, ladon, argus, gorgon
 from random import choice
 from urllib.parse import urlencode

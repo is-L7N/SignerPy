@@ -5,9 +5,9 @@ from struct import unpack
 from base64 import b64encode
 from hashlib import md5
 from Crypto.Cipher.AES import new, MODE_CBC, block_size
-from SignerPy.sm3 import SM3
-from SignerPy.simon import simon_enc
-from SignerPy.protobuf import ProtoBuf
+from .sm3 import SM3
+from .simon import simon_enc
+from .protobuf import ProtoBuf
 
 def pkcs7_pad(data: bytes, block_size: int) -> bytes:
     pad_len = block_size - (len(data) % block_size)
@@ -37,7 +37,7 @@ class Argus:
     def encrypt(xargus_bean: dict):
         protobuf = pkcs7_pad(bytes.fromhex(ProtoBuf(xargus_bean).toBuf().hex()), block_size)
         new_len = len(protobuf)
-        sign_key = b'\xac\x1a\xda\xae\x95\xa7\xaf\x94\xa5\x11J\xb3\xb3\xa9}\xd8\x00P\xaa\n91L@R\x8c\xae\xc9RV\xc2\x8c'
+        sign_key = b"\xc0/%\x0f\x86\xccO\x19\x8dW\x069\x8d)*\x8bt\x16\x9a\xbaa\xaf\xfe|\xba\x02\xe4\xa3\xb5\x19\x81c"
         sm3_output = b'\xfcx\xe0\xa9ez\x0ct\x8c\xe5\x15Y\x90<\xcf\x03Q\x0eQ\xd3\xcf\xf22\xd7\x13C\xe8\x8a2\x1cS\x04'
 
         key = sm3_output[:32]
