@@ -214,9 +214,9 @@ print(encrypt(edata=b'{"need_captcha":false"}'))
 
 **Sample Output:**
 
-'''
+```
 ATgiwD0XRkbaBpYdr1oTAs2PvSg6d5ExfzfmZanrGWShoooGLLhPIa1nImegxqCo0OOjpG6Uz2Vzndu6uxRPRfd72VA=
-'''
+```
 
 ### TTEncrypt
 
