@@ -4,12 +4,11 @@ from .gorgon import *
 from SignerPy import md5, ladon, argus, gorgon
 from random import choice
 from urllib.parse import urlencode
-import hmac, uuid, random, binascii, os, secrets, time, hashlib
 from typing import Union
+import hmac, uuid, random, binascii, os, secrets, time, hashlib, string
 
-
-def sign(params: str or None= None, url: str or None = None,data:str or None =None,payload: str or None = None, sec_device_id: str = '', cookie: str or None = None, aid: int = 1233, license_id: int = 1611921764, sdk_version_str: str = 'v05.00.06-ov-android', sdk_version: int = 167775296, platform: int = 0, unix: float = None):
-    x_ss_stub = md5(payload.encode('utf-8')).hexdigest() if payload != None else None   
+def sign(params: str or None= None, url: str or None = None,data:str or None =None,payload: str or None = None, sec_device_id: str = "AadCFwpTyztA5j9L" + ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(9)), cookie: str or None = None, aid: int = 1233, license_id: int = 1611921764, sdk_version_str: str = 'v05.00.06-ov-android', sdk_version: int = 167775296, platform: int = 0, unix: float = None,version=None):
+    
     if data is None and payload is not None:
     	data = payload
     elif payload is None and data is not None:
@@ -28,24 +27,35 @@ def sign(params: str or None= None, url: str or None = None,data:str or None =No
         unix = time.time()
     if aid is None:
         aid = int(params.get('aid', 1233))
-       
+
+    if payload:
+    	try:
+    		payload = urlencode(payload)
+    	except:
+    		pass              
     if params:
-    	params = urlencode(params)
+    	if "?" in params:
+    		try:
+    			params = params.split("?")[1]
+    		except:
+    			pass
+    	try:
+    		params = urlencode(params)
+    	except:
+    		pass
     if cookie:
-        cookie = urlencode(cookie)
+        try:
+        	cookie = urlencode(cookie)
+        except:
+        	pass
     if data:
-	    if isinstance(data, dict):
-	        data = urlencode(data)
-	    elif isinstance(data, str):
-	        pass
-	    else:
-	        data = str(data)
-    else:
-    	data = ""
-    x_ss_stub = md5(data.encode('utf-8')).hexdigest()
+	    try:
+        	data = urlencode(data)
+	    except:
+	    	pass
+    x_ss_stub = md5((data if 'data' in locals() else payload).encode('utf-8')).hexdigest()
     return {
-        **Gorgon(params, unix, payload, cookie).get_value(),
-        'content-length': str(len(payload)) if payload else '0',
+        **Gorgon(params, unix, payload, cookie, version).get_value(),
         'x-ss-stub': x_ss_stub.upper() if x_ss_stub else '',
         'x-ladon': Ladon.encrypt(int(unix), license_id, aid),
         'x-argus': Argus.get_sign(
@@ -104,7 +114,6 @@ def get(params: dict):
     'iid': str(random.randint(1, 10**19)),
     'device_id': str(random.randint(1, 10**19)),
     'openudid': str(binascii.hexlify(os.urandom(8)).decode()),
-    'app_version': '35.3.2'
 })
     return params
       

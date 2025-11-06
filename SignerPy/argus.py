@@ -5,8 +5,8 @@ from struct import unpack
 from base64 import b64encode
 from hashlib import md5
 from Crypto.Cipher.AES import new, MODE_CBC, block_size
-from .sm3 import SM3
-from .simon import simon_enc
+from .Sm3 import SM3
+from .Simon import simon_enc
 from .protobuf import ProtoBuf
 
 def pkcs7_pad(data: bytes, block_size: int) -> bytes:
