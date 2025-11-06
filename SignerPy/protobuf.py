@@ -1,5 +1,4 @@
 from enum import IntEnum, unique
-
 class ProtoError(Exception):
     def __init__(self, msg):
         self.msg = msg
@@ -20,6 +19,37 @@ class ProtoFieldType(IntEnum):
     ERROR2 = 7
 
 
+class ByteBuf:
+    def __init__(self, data, size=None):
+        if data:
+            self.mem = data
+        
+        if size is not None:
+            self.data_size = size
+        elif data is not None:
+            self.data_size = len(data)
+        else:
+            raise ValueError("Either size or data must be provided")
+
+        self.pos = 0
+
+    def data(self):
+        return self.mem
+
+    def size(self):
+        return self.data_size
+
+    def remove_padding(self):
+        padding_size = pkcs7_padding_data_length(self.mem, self.data_size, 16)
+        if padding_size == 0:
+            return self.data_size
+        self.data_size = padding_size
+        dst = (ctypes.c_uint8 * self.data_size)()
+        dst = self.mem[:self.data_size]
+        self.mem = dst
+        return self.mem
+        
+        
 class ProtoField:
     def __init__(self, idx, type, val):
         self.idx = idx
@@ -96,8 +126,6 @@ class ProtoReader:
         len = self.readVarint()
         return self.read(len)
 
-    def eof(self):
-        return self.pos >= len(self.data)
 
 class ProtoWriter:
     def __init__(self):
@@ -285,33 +313,3 @@ class ProtoBuf:
             else:
                 raise ProtoError('unsupport type(%s) to protobuf' % (type(v)))
         return out
-
-    @staticmethod
-    def fromBuf(buf: bytes) -> dict:
-        reader = ProtoReader(buf)
-        result = {}
-        while not reader.eof():
-            key = reader.readVarint()
-            field_number = key >> 3
-            wire_type = key & 7
-
-            if wire_type == 0:
-                value = reader.readVarint()
-            elif wire_type == 1:
-                value = reader.readInt64()
-            elif wire_type == 2:
-                value = reader.readString()
-            elif wire_type == 5:
-                value = reader.readInt32()
-            else:
-                raise Exception("Beklenmeyen wire type: %s" % wire_type)
-
-            if field_number in result:
-                if isinstance(result[field_number], list):
-                    result[field_number].append(value)
-                else:
-                    result[field_number] = [result[field_number], value]
-            else:
-                result[field_number] = value
-        return result
-

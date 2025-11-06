@@ -1,33 +1,41 @@
 class SM3:
     def __init__(self) -> None:
         self.IV = [1937774191, 1226093241, 388252375, 3666478592, 2842636476, 372324522, 3817729613, 2969243214]
-        self.TJ = [2043430169] * 16 + [2055708042] * 48
+        self.TJ = [2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2043430169, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042, 2055708042]
     
     def __rotate_left(self, a: int, k: int) -> int:
         k = k % 32
+
         return ((a << k) & 0xFFFFFFFF) | ((a & 0xFFFFFFFF) >> (32 - k))
 
     def __FFJ(self, X: int, Y: int, Z: int, j: int) -> int:
+
         if 0 <= j and j < 16:
             ret = X ^ Y ^ Z
         elif 16 <= j and j < 64:
             ret = (X & Y) | (X & Z) | (Y & Z)
+
         return ret
 
     def __GGJ(self, X: int, Y: int, Z: int, j: int) -> int:
+
         if 0 <= j and j < 16:
             ret = X ^ Y ^ Z
         elif 16 <= j and j < 64:
             ret = (X & Y) | ((~X) & Z)
+
         return ret
 
     def __P_0(self, X: int) -> int:
         return X ^ (self.__rotate_left(X, 9)) ^ (self.__rotate_left(X, 17))
 
     def __P_1(self, X: int) -> int:
-        return X ^ (self.__rotate_left(X, 15)) ^ (self.__rotate_left(X, 23))
+        Z = X ^ (self.__rotate_left(X, 15)) ^ (self.__rotate_left(X, 23))
+
+        return Z
 
     def __CF(self, V_i: list, B_i: bytearray) -> list:
+
         W = []
         for i in range(16):
             weight = 0x1000000
@@ -53,11 +61,13 @@ class SM3:
         A, B, C, D, E, F, G, H = V_i
 
         for j in range(0, 64):
+
             SS1 = self.__rotate_left(
                 ((self.__rotate_left(A, 12)) + E + (self.__rotate_left(self.TJ[j], j)))
                 & 0xFFFFFFFF,
                 7,
             )
+
             SS2 = SS1 ^ (self.__rotate_left(A, 12))
             TT1 = (self.__FFJ(A, B, C, j) + D + SS2 + W_1[j]) & 0xFFFFFFFF
             TT2 = (self.__GGJ(E, F, G, j) + H + SS1 + W[j]) & 0xFFFFFFFF
@@ -87,7 +97,7 @@ class SM3:
         reserve1 = len1 % 64
         msg.append(0x80)
         reserve1 = reserve1 + 1
-        
+        # 56-64, add 64 byte
         range_end = 56
         if reserve1 > range_end:
             range_end += 64
