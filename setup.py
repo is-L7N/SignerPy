@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="SignerPy",
-    version="0.11.4",
+    version="0.12.0",
     author="L7N",
     author_email="l7ng4q@gmail.com",
     url="https://github.com/is-L7N/SignerPy/",

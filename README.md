@@ -1,4 +1,4 @@
-# Best Library To Signture Tiktok Headers and more
+# Best Library To Signture Tiktok apis and more
 # New Update 8404 Gorgon and more
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
