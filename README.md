@@ -1,4 +1,4 @@
-# SignerPy Utility Library 
+# Best Library To Signture Tiktok apis and more
 # New Update 8404 Gorgon and more
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
@@ -18,12 +18,11 @@ SignerPy is a Python library that provides various tools for encryption, signing
 ## Installation
 
 ```bash
-pip install SignerPy==0.8
+pip install SignerPy==0.11.4
 git clone https://github.com/is-L7N/SignerPy.git
 cd SignerPy
 
 ```
-
 ---
 
 ## Modules
@@ -50,15 +49,22 @@ SignerPy contains the following modules:
 
 ## Usage Examples
 
-## Signture Headers 
+## Signture Headers
+
+**Sample Output:**
+
+```bash
+{'x-ss-req-ticket': '1762387009792', 'x-khronos': '1762387009', 'x-gorgon': '0404b0d30000d4cec309eb57387ccee15dbc3694a62765ae25d4', 'x-ss-stub': 'D41D8CD98F00B204E9800998ECF8427E', 'x-ladon': 'cfyN2aMtfQ/hwsBzfpdfjK4HjO64+9+eAsAbXFoG7Fdsq5LE', 'x-argus': '8oGzD48Lx0I+DCXDwk+l2r542RIQVcGognB+CPA22nzh1Pn93HEBilqjiOSbjSPgqG0N9qYeHcveeZRXBg99oAMRTjLWjQ/YphKc/rfFnLFfAYGmPqG9WER/XDi3cTpgwihmg8f8PYCtoS6h+wdsMZd0UXf/wxbjaovR/31i1No+zBUDnInkI6FTGGOqopkbweiNmtUg2VeSmH92+RU0nM3azBwy+ROe3HNJRwcIK1yb/zlX8blEM46qE3vT6Xevz5g8lv4SLGlNgf6W08t4Ixeu'}
+```
+## if You Need 8402 or 4404 or 8404 Gorgon
+
 ```python
 from SignerPy import sign
 
-signature = sign(params=params, payload=None)
+signature = sign(params=params, payload=None, version=8404) # version=4404 or version=8402 
 print(signature)
 ```
 **Sample Output:**
-
 ```bash
 {'x-ss-req-ticket': '1762259171000', 'x-khronos': '1762259171', 'x-gorgon': '840490e90000eb195e1a4e93f8ee4c6096ef9be9245477614426', 'content-length': '2', 'x-ss-stub': 'D2E4201A71AB14D92FD36DA8B4DC6E47', 'x-ladon': 'YVfzzrPh5G1mKlCPOwnRyTBLvSlCwcMoUJpynWn7LKq5IpjO', 'x-argus': '8oES6TTDk19XpiXVRoMY8sSm2PHDIlHeay5JCmPO6o+RltBIOc0BCDuZDMos550YipLLaqxeRkhXwqg+r6keWsdL5eeIWHPB7906llEJi+4oUlXZHjQZUpgu8hhojjt6SluTr8zDWpDsP9eoSbrEX/sE6FLWogayQpDgfivNeEzjMI1qs/CKZi0KNC4Es1+LjBii6IHrWtwgPlv9fmiL+xlS8rc5+L9hrqK38Bm49QsmmA=='}
 ```
@@ -214,9 +220,9 @@ print(encrypt(edata=b'{"need_captcha":false"}'))
 
 **Sample Output:**
 
-```
+'''
 ATgiwD0XRkbaBpYdr1oTAs2PvSg6d5ExfzfmZanrGWShoooGLLhPIa1nImegxqCo0OOjpG6Uz2Vzndu6uxRPRfd72VA=
-```
+'''
 
 ### TTEncrypt
 
@@ -247,5 +253,3 @@ b'tc\x05\x10\x00\x00\x1c^\xe4\xa6...'
 </p>
 
 ---
-
-
