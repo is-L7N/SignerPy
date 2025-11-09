@@ -18,7 +18,7 @@ SignerPy is a Python library that provides various tools for encryption, signing
 ## Installation
 
 ```bash
-pip install SignerPy==0.11.4
+pip install SignerPy==0.12.0
 git clone https://github.com/is-L7N/SignerPy.git
 cd SignerPy
 
